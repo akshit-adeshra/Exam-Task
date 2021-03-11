@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block body %}
+{% for product in products %}
+<div class="card-group">
+  <div class="card">
+    <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ product.title }}</h5>
+      <p class="card-text">Description : {{ product.description }}</p>
+      <p class="card-text">Id: {{ product.sku }}</p>
+      <p class="card-text">Price: &#8377;{{ product.price }}</p>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}
