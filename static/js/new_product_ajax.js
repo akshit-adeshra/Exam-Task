@@ -5,6 +5,9 @@
      myform.submit(function(e){
                  $("#product-success-msg").show();
 
+    });
+});                 
+
 //         e.preventDefault();
 //         var formData = $(this).serialize();
 //         $.ajax({
@@ -30,5 +33,3 @@
 //             console.log(textStatus);
 //             console.log(errorThrown);
 //         }
-     });
- });
