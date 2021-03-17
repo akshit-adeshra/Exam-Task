@@ -13,9 +13,19 @@
 <!--  Nav bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="{% url 'home' %}">My Ecommerce</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="navbar navbar-default navbar-static-top">
+    <div class="container bootstrap snippets bootdey">
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="dropdown "><a href="#" id="drop1" data-toggle="dropdown" class="dropdown-toggle" role="button">Account Options <b class="caret"></b></a>
+              <ul role="menu" class="dropdown-menu" aria-labelledby="drop1">
+                  <li role="presentation"><a href="accounts/logout" role="menuitem">Logout</a></li>
+              </ul>
+          </li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">

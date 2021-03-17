@@ -1,19 +1,24 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
+{% load thumbnail %}
 
 {% block body %}
-{% for product in products %}
-<div class="card-group">
-  <div class="card">
-    <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
-    <div class="card-body">
-      <h1 class="card-title">{{ product.title }}</h1>
-      <p class="card-text">Description : {{ product.description }}</p>
-      <p><strong>Categories:</strong> <a rel="tag" href="#">{{ product.categories.all|join:", " }}</a></p>
-      <p class="card-text">Id: {{ product.sku }}</p>
-      <p class="card-text">Price: &#8377;{{ product.price }}</p>
-      <a href="{% url 'product_detail' product.pk %}" role="button" class="btn btn-primary">Show Details</a>
+<div class="row">
+  {% for product in products %}
+  <div class="col-sm-6 col-md-4">
+    <div class="shop__thumb">
+        <div class="shop-thumb__img">
+          <img src="{{ product.image|thumbnail_url:'avatar' }}" class="img-responsive" alt="...">
+        </div>
+        <h5 class="shop-thumb__title">
+          {{ product.title }}
+        </h5>
+        <div class="shop-thumb__price">
+          Price: &#8377;{{ product.price }}
+        </div>
+        <a href="{% url 'product_detail' product.pk %}" role="button" class="btn btn-primary">Show Details</a>
     </div>
   </div>
-{% endfor %}
+  {% endfor %}
+</div>
 {% endblock %}
