@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from .models import *
 from .forms import *
 
@@ -11,10 +12,35 @@ class HomeView(ListView):
     model = Product
     template_name = 'home.html'
     context_object_name = 'products'
+    queryset = Product.objects.filter(is_public=True)
 
-    def get_queryset(self):
-        queryset = super(HomeView, self).get_queryset()
-        return queryset.filter(is_public=True)
+
+class ProductDetail(DetailView):
+    model = Product
+    template_name = 'product_details.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class ProductUpdate(UpdateView):
+    model = Product
+    template_name = 'product_update.html'
+    form_class = ProductForm
+    context_object_name = 'product'
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Product, pk=pk)
+
+    def get_success_url(self):
+        return reverse('product_detail', kwargs={'pk': self.kwargs['pk']})
+
+    def form_valid(self, form):
+        super(ProductUpdate, self).form_valid(form)
+        return redirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        print("------------INVALID FORM----------------")
+        return super(ProductUpdate, self).form_invalid(form)
 
 
 # IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -38,8 +64,3 @@ def add_product(request):
 
     context = {"form": form}
     return render(request, 'new_product.html', context)
-
-
-class ProductDetail(DetailView):
-    model = Product
-    template_name = 'product_details.html'

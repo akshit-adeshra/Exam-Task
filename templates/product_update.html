@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!--<div id="product-success-msg" class="alert alert-success">Product Added Successfully</div>-->
+<br><br>
+<form method="post" id="add-product-form" enctype="multipart/form-data" class="mb-4">
+    {% csrf_token %}
+    <h1 style="margin-left: 40%">Product Update</h1>
+
+    {% include 'includes/form.html' %}
+    <br>
+    <div>
+        <a id="cancel-btn" href="{% url 'product_detail' product.pk %}" role="button" class="btn btn-danger">Cancel</a>
+        <button id="update-btn" type="submit" class="btn btn-success">Product Update</button>
+    </div>
+    <br><br><br>
+</form>
+{% endblock %}

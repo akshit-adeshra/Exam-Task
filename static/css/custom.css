@@ -1,3 +1,11 @@
+#edit-product-btn {
+    margin-left: 32%;
+}
+
+#update-btn {
+    float: right;
+}
+
 /* Detail Page CSS (reference: 'https://www.bootdey.com/snippets/view/shop-product-detail#css' ) */
 body{margin-top:20px;
     background:#eee;
@@ -162,10 +170,6 @@ body{margin-top:20px;
 
 #add-product-form {
     margin: 0 250px 0 250px;
-}
-
-#add-product-form button{
-    margin-left: 41%;
 }
 
 /* Home Page CSS [Ref:- https://www.bootdey.com/snippets/view/Shop-page]*/
