@@ -1,9 +1,11 @@
-from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, View, UpdateView
+from django.views.generic.edit import DeleteView
+
 from .models import *
 from .forms import *
 
@@ -20,11 +22,13 @@ class ProductDetail(DetailView):
     template_name = 'product_details.html'
 
 
-class ProductDelete(DeleteView):
+class ProductDelete(SuccessMessageMixin, DeleteView):
     model = Product
     template_name = 'product_delete.html'
     success_url = '/'
     context_object_name = 'product'
+
+    success_message = "Record deleted Successfully."
 
 
 class ProductUpdate(UserPassesTestMixin, UpdateView):
@@ -53,29 +57,54 @@ class ProductUpdate(UserPassesTestMixin, UpdateView):
         return super(ProductUpdate, self).form_invalid(form)
 
 
+class AddProduct(UserPassesTestMixin, View):
+    model = Product
+    form_class = ProductForm
+    template_name = 'new_product.html'
+
+    # this func for protecting the view for 'admin' access only, and to use it inherit UserPassesTestMixin at the leftmost position of your view.
+    def test_func(self):
+        return self.request.user.username.startswith('admin')
+
+    def get(self, request, *args, **kwargs):
+        form = ProductForm()
+        return render(self.request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        if self.request.method == 'POST' and self.request.is_ajax():
+            form = ProductForm(self.request.POST, self.request.FILES)
+            if form.is_valid():
+                product = form.save()
+                product.image = request.FILES['image']
+                form.save()
+                return JsonResponse({'status': "Save"}, status=200)
+        return JsonResponse({'status': "Save"}, status=400)
+
 # IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
-# def admin_check(user): 
+# def admin_check(user):
 #     return user.username.startswith('admin')
-
+#
 # @user_passes_test(admin_check)
 # ----------- Alternative Code of admin check method above ------------------------
-@user_passes_test(lambda user: user.is_superuser)
-def add_product(request):
-    form = ProductForm()
-    if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save()
-            product.image = request.FILES['image']
-            # file_type = product.image.url.split('.')[-1]
-            # file_type = file_type.lower()
-            # if file_type not in IMAGE_FILE_TYPES:
-            #     return render(request, 'profile_maker/error.html')
-
-            # return JsonResponse({'status': "Save"})
-            # return redirect('product_detail', pk=product.pk)
-            return redirect('new_product')
-
-    context = {"form": form}
-    return render(request, 'new_product.html', context)
+# @user_passes_test(lambda user: user.is_superuser)
+#  def add_product(request):
+#      form = ProductForm()
+#      if request.method == 'POST':
+#          form = ProductForm(request.POST, request.FILES)
+#          if form.is_valid():
+#              title = request.POST['title']
+#              product = form.save()
+#              product.image = request.FILES['image']
+#              form.save()
+#              # file_type = product.image.url.split('.')[-1]
+#              # file_type = file_type.lower()
+#              # if file_type not in IMAGE_FILE_TYPES:
+#              #     return render(request, 'profile_maker/error.html')
+#
+#              return JsonResponse({'status': "Save"})
+#              # return redirect('product_detail', pk=product.pk)
+#              # return redirect('new_product')
+#
+#      context = {"form": form}
+#      return render(request, 'new_product.html', context)

@@ -808,11 +808,3 @@ body{margin-top:20px;}
   color: #ccc;
   font-weight: 600;
 }
-
-/* --------------------------------------------- delete page CSS ---------------------------------------------------- */
-.delete-confirmation {
-  min-height: 100vh; // height of the browser viewport
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}

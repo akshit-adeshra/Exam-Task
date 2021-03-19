@@ -3,6 +3,16 @@
 {% load thumbnail %}
 
 {% block body %}
+
+{% for message in messages %}
+<div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message | safe }}
+</div>
+{% endfor %}
+
 <div class="row">
   {% for product in products %}
   <div class="col-sm-6 col-md-4">
