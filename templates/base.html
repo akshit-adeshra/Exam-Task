@@ -6,6 +6,7 @@
   <title>Title</title>
   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
   {% block stylesheet %}
   {% endblock %}
@@ -19,7 +20,7 @@
         <ul class="nav navbar-nav">
           <li class="dropdown "><a href="#" id="drop1" data-toggle="dropdown" class="dropdown-toggle" role="button">Account Options <b class="caret"></b></a>
               <ul role="menu" class="dropdown-menu" aria-labelledby="drop1">
-                  <li role="presentation"><a href="accounts/logout" role="menuitem">Logout</a></li>
+                  <li role="presentation"><a href="/accounts/logout" role="menuitem">Logout</a></li>
               </ul>
           </li>
         </ul>

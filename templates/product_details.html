@@ -32,7 +32,8 @@
                 </div>
                 <div class="m-bot15"> <strong>Price : </strong> <span class="pro-price">&#8377; {{ product.price }}</span></div>
                 <br>
-                <a id="edit-product-btn" role="button" href="{% url 'product_update' product.pk %}" class="btn btn-round btn-danger" type="button"> Edit Product Details </a>
+                <a id="edit-product-btn" role="button" href="{% url 'product_update' product.pk %}" class="btn btn-round btn-primary" type="button"><i class="far fa-edit"></i> Edit Product Details </a>
+                <a id="delete-product-btn" href="{% url 'product_delete' product.pk %}" role="button" class="btn btn-danger"><i class="fas fa-trash-alt fa-lg"></i> Delete</a>
                 <br><br>
                 <!-- <div class="form-group">
                     <label>Quantity</label>

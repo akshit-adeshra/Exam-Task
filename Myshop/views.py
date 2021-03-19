@@ -3,8 +3,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.utils.decorators import method_decorator
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from .models import *
 from .forms import *
 
@@ -20,6 +19,12 @@ class ProductDetail(DetailView):
     model = Product
     template_name = 'product_details.html'
 
+
+class ProductDelete(DeleteView):
+    model = Product
+    template_name = 'product_delete.html'
+    success_url = '/'
+    context_object_name = 'product'
 
 
 class ProductUpdate(UserPassesTestMixin, UpdateView):

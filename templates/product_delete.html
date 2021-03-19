@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="delete-confirmation">
+    <div class="delete-box">
+        <form method="post" id="product-delete-form">
+            {% csrf_token %}
+            <br><br>
+            <p>Are you sure you want to delete "{{ product }}"?</p>
+            <img src="{{ product.image.url }}" alt="Product Pic">
+            <br><br>
+            <div>
+                <a href="{% url 'product_detail' product.pk %}" role="button" class="btn btn-primary">Cancel</a>
+                <button class="btn btn-danger" type="submit">Confirm Deletion</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

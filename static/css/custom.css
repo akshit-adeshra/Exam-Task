@@ -1,5 +1,9 @@
 #edit-product-btn {
-    margin-left: 32%;
+    margin-left: 15%;
+}
+
+#delete-product-btn {
+    margin-left: 15%;
 }
 
 #update-btn {
@@ -805,4 +809,10 @@ body{margin-top:20px;}
   font-weight: 600;
 }
 
-/* nav bar css */
+/* --------------------------------------------- delete page CSS ---------------------------------------------------- */
+.delete-confirmation {
+  min-height: 100vh; // height of the browser viewport
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

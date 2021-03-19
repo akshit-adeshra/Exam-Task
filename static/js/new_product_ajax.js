@@ -1,35 +1,22 @@
- $(document).ready(function() {
-     $("#product-success-msg").hide();
+// $(document).ready(function() {
+//    $('#add-product-form').submit(function(e) {
+//        e.preventDefault();
+//        var formData = $(this).serialize();
+//       //Create AJAX Call
+//       $.ajax({
+//           type: "POST",
+//           url: "/new-product/",
+//           data: formData,
+//           success: function(response){
+//                //reset the form after successful submit
+//                $("#add-product-form")[0].reset();
+////                $(this)[0].reset();
+//           },
+//           error : function(response){
+//                console.log('Error aai gyi..........!!!!!!!!!!!-----------------')
+//                console.log(response);
+//           }
+//       });
+//    });
+//});
 
-     var myform = $('#add-product-form');
-     myform.submit(function(e){
-                 $("#product-success-msg").show();
-
-    });
-});                 
-
-//         e.preventDefault();
-//         var formData = $(this).serialize();
-//         $.ajax({
-//             method: "POST",
-//             url: myform.attr("data-url"),
-//             data: formData,
-//             success: handleFormSuccess,
-//             error: handleFormError,
-//         });
-
-//         function handleFormSuccess(data, textStatus, jqXHR) {
-//             console.log(data);
-//             if (data['status'] == 'Save') {
-//                 $("#product-success-msg").show();
-//             }
-//             // console.log(textStatus);
-//             // console.log(jqXHR);
-//             myform[0].reset();
-//         }
-
-//         function handleFormError(jqXHR, textStatus, errorThrown) {
-//             console.log(jqXHR);
-//             console.log(textStatus);
-//             console.log(errorThrown);
-//         }

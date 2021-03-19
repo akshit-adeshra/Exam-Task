@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div id="product-success-msg" class="alert alert-success">Product Added Successfully</div>
+<!--<div id="product-success-msg" class="alert alert-success">Product Added Successfully</div>-->
 <br><br>
-<form method="post" id="add-product-form" novalidate enctype="multipart/form-data" class="mb-4" data-url="{% url 'new_product' %}">
+<form method="post" id="add-product-form" enctype="multipart/form-data" class="mb-4">
     {% csrf_token %}
     <p style="margin-left: 40%">Add New Product</p>
 
