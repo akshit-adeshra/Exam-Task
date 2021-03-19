@@ -22,13 +22,17 @@ class ProductDetail(DetailView):
     template_name = 'product_details.html'
 
 
-class ProductDelete(SuccessMessageMixin, DeleteView):
+class ProductDelete(UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     model = Product
     template_name = 'product_delete.html'
     success_url = '/'
     context_object_name = 'product'
 
     success_message = "Record deleted Successfully."
+
+    # this func for protecting the view for 'admin' access only, and to use it inherit UserPassesTestMixin at the leftmost position of your view.
+    def test_func(self):
+        return self.request.user.username.startswith('admin')
 
 
 class ProductUpdate(UserPassesTestMixin, UpdateView):
