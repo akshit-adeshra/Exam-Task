@@ -33,6 +33,7 @@
            success: function(response){
                 //reset the form after successful submit
                 $("#add-product-form")[0].reset();
+                $("#myModal").modal('show');
 //                $(this)[0].reset();
            },
            error : function(response){

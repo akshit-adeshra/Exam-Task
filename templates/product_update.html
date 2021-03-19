@@ -10,8 +10,10 @@
     {% include 'includes/form.html' %}
     <br>
     <div>
-        <a id="cancel-btn" href="{% url 'product_detail' product.pk %}" role="button" class="btn btn-danger">Cancel</a>
-        <button id="update-btn" type="submit" class="btn btn-success">Product Update</button>
+        <a id="cancel-btn" href="{% url 'product_detail' product.pk %}" role="button" class="btn btn-danger">
+            <i class="fas fa-window-close"></i> Cancel</a>
+        <button id="update-btn" type="submit" class="btn btn-success"><i class="fas fa-save"></i>
+            Product Update</button>
     </div>
     <br><br><br>
 </form>

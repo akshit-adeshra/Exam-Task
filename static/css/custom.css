@@ -6,8 +6,16 @@
     margin-left: 15%;
 }
 
+#add-product-btn {
+    margin-left: 15%;
+}
+
+#cancel-btn {
+    margin-left: 30%;
+}
+
 #update-btn {
-    float: right;
+    margin-left: 25%;
 }
 
 /* Detail Page CSS (reference: 'https://www.bootdey.com/snippets/view/shop-product-detail#css' ) */
