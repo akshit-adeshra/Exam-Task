@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
@@ -112,3 +113,26 @@ class AddProduct(UserPassesTestMixin, View):
 #
 #      context = {"form": form}
 #      return render(request, 'new_product.html', context)
+
+
+class SearchResults(ListView):
+    model = Product
+    template_name = 'search_results.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('query')
+        if len(query) > 78:
+            products = Product.objects.none()
+            messages.error(self.request, "No search results found for your query. Please refine your query.")
+        else:
+            products = Product.objects.filter(title__icontains=query).filter(is_public=True)
+            if products.count() == 0:
+                messages.warning(self.request, "No search results found for your query: '{0}'. Please refine your query".format(query))
+            else:
+                messages.success(self.request, "{0} Results found matching your search query: '{1}'".format(products.count(),query))
+
+        context['query'] = query
+        context['products'] = products
+        return context

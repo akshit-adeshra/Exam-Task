@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load thumbnail %}
+
+{% block body %}
+
+{% for message in messages %}
+<div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message | safe }}
+</div>
+{% endfor %}
+
+<div class="container my-3">
+    {% if products|length < 1 %}
+    <p>No search results</p><br>
+
+    Your search query: <b>{{query}}</b> did not match any documents. <br>
+    Suggestions:
+    <ul>
+        <li>Try different results</li>
+        <li>Make sure that all words are spelled correctly.</li>
+        <li>Try different keywords.</li>
+        <li>Try more general keywords.</li>
+    </ul>
+    {% endif %}
+
+  {% for product in products %}
+  <div class="col-sm-6 col-md-4">
+    <div class="shop__thumb">
+        <div class="shop-thumb__img">
+          <img src="{{ product.image|thumbnail_url:'avatar' }}" class="img-responsive" alt="...">
+        </div>
+        <h5 class="shop-thumb__title">
+          {{ product.title }}
+        </h5>
+        <div class="shop-thumb__price">
+          Price: &#8377;{{ product.price }}
+        </div>
+        <div>
+        <a href="{% url 'product_detail' product.pk %}" role="button" class="btn btn-primary"><i class="fas fa-info-circle"></i> Show Details</a>
+        </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
