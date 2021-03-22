@@ -15,6 +15,9 @@
 }
 
  $(document).ready(function() {
+    //  for jquery data tables
+    $('#myTable').DataTable();
+
     $('#add-product-form').on('submit', function(e) {
         e.preventDefault();
         var data = new FormData($('form').get(0));

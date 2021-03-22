@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
+  <!-- for jquery datatables -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
   {% block stylesheet %}
   {% endblock %}
 
@@ -35,10 +37,10 @@
         <a class="nav-link" href="{% url 'new_product' %}">Add New Product <span class="sr-only">(current)</span></a>
       </li>
     </ul>
-    <form method="get" action="/search_results" class="form-inline my-2 my-lg-0">
+    <!-- <form method="get" action="/search_results" class="form-inline my-2 my-lg-0">
       <input name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    </form> -->
   </div>
 </nav>
 
@@ -56,6 +58,8 @@
 <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/new_product_ajax.js' %}"></script>
+<!-- for jquery dataTables -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 </body>
 
 </html>
