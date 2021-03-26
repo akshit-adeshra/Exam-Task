@@ -2,10 +2,11 @@ from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, View, UpdateView
 from django.views.generic.edit import DeleteView
+from haystack.query import SearchQuerySet
 
 from .models import *
 from .forms import *
@@ -83,7 +84,7 @@ class AddProduct(UserPassesTestMixin, View):
                 product.image = request.FILES['image']
                 form.save()
                 return JsonResponse({'status': "Save"}, status=200)
-        return JsonResponse({'status': "Save"}, status=400)
+        return JsonResponse({'status': "Error"}, status=400)
 
 # IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
@@ -120,19 +121,6 @@ class SearchResults(ListView):
     template_name = 'search_results.html'
     context_object_name = 'products'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        query = self.request.GET.get('query')
-        if len(query) > 78:
-            products = Product.objects.none()
-            messages.error(self.request, "No search results found for your query. Please refine your query.")
-        else:
-            products = Product.objects.filter(title__icontains=query).filter(is_public=True)
-            if products.count() == 0:
-                messages.warning(self.request, "No search results found for your query: '{0}'. Please refine your query".format(query))
-            else:
-                messages.success(self.request, "{0} Results found matching your search query: '{1}'".format(products.count(),query))
-
-        context['query'] = query
-        context['products'] = products
-        return context
+    def get_queryset(self):
+        self.result = self.request.GET.get('query')
+        return SearchQuerySet().filter(text=self.result)

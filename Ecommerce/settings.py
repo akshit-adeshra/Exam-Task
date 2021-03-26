@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'Myshop',
     'widget_tweaks',
     'easy_thumbnails',
+    'whoosh',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -138,4 +140,13 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
+}
+
+# django-haystack configs
+WHOOSH_INDEX = os.path.join(BASE_DIR, 'whoosh/')
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': WHOOSH_INDEX,
+    }
 }

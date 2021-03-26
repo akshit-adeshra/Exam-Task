@@ -17,7 +17,7 @@
  $(document).ready(function() {
     $('#add-product-form').on('submit', function(e) {
         e.preventDefault();
-        var data = new FormData($('form').get(0));
+        var data = new FormData($('form').get(1));  // get parameter updated, coz now there are 2 forms in total
        //Create AJAX Call
        $.ajax({
            type: "POST",
