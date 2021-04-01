@@ -13,34 +13,46 @@
 </div>
 {% endfor %}
 
-<div class="row">
-  {% for product in products %}
-  <div class="col-sm-6 col-md-4">
-    <div class="shop__thumb">
-        <div class="shop-thumb__img">
-          <img src="{{ product.image|thumbnail_url:'avatar' }}" class="img-responsive" alt="...">
-        </div>
-        <h5 class="shop-thumb__title">
-          {{ product.title }}
-        </h5>
-        <div class="shop-thumb__price">
-          Price: &#8377;{{ product.price }}
-        </div>
-        <div>
-        <a href="{% url 'product_detail' product.pk %}" role="button" class="btn btn-primary"><i class="fas fa-info-circle"></i> Show Details</a>
-<!--        To enable below button, you have to uncomment template_name from views -->
-<!--        <a href="{% url 'product_delete' product.pk %}" role="button" class="btn btn-danger"><i class="fas fa-trash-alt fa-lg"></i> Delete</a>-->
+<div class="col-md-10">
+  <div class="row">
+    {% for product in products %}
+    <div class="col-sm-6 col-md-4">
+      <div class="shop__thumb">
+          <div class="shop-thumb__img">
+            <img src="{{ product.image|thumbnail_url:'avatar' }}" class="img-responsive" alt="...">
+          </div>
+          <h5 class="shop-thumb__title">
+            {{ product.title }}
+          </h5>
+          <div class="shop-thumb__price">
+            Price: &#8377;{{ product.price }}
+          </div>
+          <div>
+          <a href="{% url 'product_detail' product.pk %}" role="button" class="btn btn-primary"><i class="fas fa-info-circle"></i> Show Details</a>
+  <!--        To enable below button, you have to uncomment template_name from views -->
+  <!--        <a href="{% url 'product_delete' product.pk %}" role="button" class="btn btn-danger"><i class="fas fa-trash-alt fa-lg"></i> Delete</a>-->
 
-        <!--    If you want to use this form, comment the delete button from above. -->
-<!--        <form action="{% url 'product_delete' product.id %}" method="POST">-->
-<!--            {% csrf_token %}-->
-<!--            <button type="submit" class="btn btn-default btn-sm">-->
-<!--                <i class="fas fa-trash-alt fa-2x"></i>-->
-<!--            </button>-->
-<!--        </form>-->
-        </div>
+          <!--    If you want to use this form, comment the delete button from above. -->
+  <!--        <form action="{% url 'product_delete' product.id %}" method="POST">-->
+  <!--            {% csrf_token %}-->
+  <!--            <button type="submit" class="btn btn-default btn-sm">-->
+  <!--                <i class="fas fa-trash-alt fa-2x"></i>-->
+  <!--            </button>-->
+  <!--        </form>-->
+          </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="col-md-2 popular-tags">
+  <div class="card my-4">
+    <h5 class="card-header">Popular Tags</h5>
+    <div class="card-body">
+      {% for tag, count in popular_tags %}
+        <a name="tag-{{forloop.counter}}" ><span class="badge badge-info">{{ tag }} ({{ count }})</span></a>
+      {% endfor %}
     </div>
   </div>
-  {% endfor %}
 </div>
 {% endblock %}

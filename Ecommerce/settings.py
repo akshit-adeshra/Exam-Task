@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Default Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,11 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Project Apps
     'Myshop',
+
+    # External Libraries
     'widget_tweaks',
     'easy_thumbnails',
     'whoosh',
     'haystack',
+    'taggit',
 ]
 
 MIDDLEWARE = [

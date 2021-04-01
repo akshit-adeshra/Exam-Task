@@ -18,6 +18,11 @@ class HomeView(ListView):
     context_object_name = 'products'
     queryset = Product.objects.filter(is_public=True)
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["popular_tags"] = Product.objects.get_counted_tags()
+        return context
+
 
 class ProductDetail(DetailView):
     model = Product
